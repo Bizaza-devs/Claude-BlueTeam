@@ -1,0 +1,23 @@
+{
+  "name": "bizaza-devs",
+  "owner": {
+    "name": "Bizaza-devs",
+    "url": "https://github.com/Bizaza-devs"
+  },
+  "metadata": {
+    "description": "Defensive-security skill bundles for Claude Code.",
+    "version": "1.0.0"
+  },
+  "plugins": [
+    {
+      "name": "claude-blueteam",
+      "source": "./",
+      "description": "Blue-team bundle: SOC triage, incident response, detection engineering, ATT&CK threat hunting, DFIR, hardening, vuln prioritisation, threat intel, IR reporting. 45 skills, 16 commands, 5 subagents.",
+      "version": "1.0.0",
+      "author": { "name": "Bizaza-devs", "url": "https://github.com/Bizaza-devs" },
+      "homepage": "https://github.com/Bizaza-devs/Claude-BlueTeam",
+      "category": "security",
+      "tags": ["security", "blue-team", "soc", "dfir", "incident-response", "detection-engineering", "threat-hunting", "forensics"]
+    }
+  ]
+}

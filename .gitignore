@@ -1,0 +1,14 @@
+# Case folders hold real incident data: never commit them.
+cases/*
+!cases/README.md
+__pycache__/
+*.pyc
+.DS_Store
+Thumbs.db
+*.E01
+*.raw
+*.mem
+*.vmem
+*.dmp
+*.pcap
+*.pcapng

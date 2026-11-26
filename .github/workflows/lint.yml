@@ -1,0 +1,22 @@
+name: lint
+on:
+  push:
+  pull_request:
+jobs:
+  skills:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Lint skills, commands, agents
+        run: python scripts/lint_skills.py
+      - name: Validate plugin manifests
+        run: python -c "import json; [json.load(open(p)) for p in ('.claude-plugin/plugin.json', '.claude-plugin/marketplace.json')]"
+      - name: Case scaffolder smoke test
+        run: |
+          CASE_ROOT="$RUNNER_TEMP/cases" bash scripts/new-case.sh "CI Smoke Test"
+          d=$(ls -d "$RUNNER_TEMP"/cases/*-ci-smoke-test)
+          for f in notes.md timeline.csv iocs.csv evidence-log.csv actions.md report.md; do test -s "$d/$f"; done
+          head -1 "$d/timeline.csv" | grep -q '^timestamp_utc,host,source,event,detail,analyst,confidence$'
