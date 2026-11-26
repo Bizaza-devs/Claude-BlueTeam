@@ -1,16 +1,16 @@
 # =====================================================================
-# install.ps1 - copy-install claude-blueteam into Claude Code (Windows)
+# install.ps1 - copy-install blueteam into Claude Code (Windows)
 #
 #   pwsh ./scripts/install.ps1             # skills + commands + agents -> ~\.claude\
 #   pwsh ./scripts/install.ps1 -Uninstall  # remove what this script installed
 #
 # Prefer the plugin install when you can:
 #   /plugin marketplace add Bizaza-devs/Claude-BlueTeam
-#   /plugin install claude-blueteam@bizaza-devs
+#   /plugin install blueteam@bizaza-devs
 #
 # Existing items with the same name are backed up to
-# ~\.claude\install-backups\claude-blueteam-<timestamp>\ (outside the loading path).
-# A manifest of installed items is kept in ~\.claude\.skill-manifests\claude-blueteam.txt
+# ~\.claude\install-backups\blueteam-<timestamp>\ (outside the loading path).
+# A manifest of installed items is kept in ~\.claude\.skill-manifests\blueteam.txt
 # =====================================================================
 [CmdletBinding()]
 param([switch] $Uninstall)
@@ -19,7 +19,7 @@ $ErrorActionPreference = 'Stop'
 $repo     = Split-Path -Parent $PSScriptRoot
 $claude   = Join-Path $HOME '.claude'
 $manDir   = Join-Path $claude '.skill-manifests'
-$manifest = Join-Path $manDir 'claude-blueteam.txt'
+$manifest = Join-Path $manDir 'blueteam.txt'
 
 if ($Uninstall) {
     if (-not (Test-Path $manifest)) { Write-Host 'Nothing to uninstall (no manifest).'; return }
@@ -28,12 +28,12 @@ if ($Uninstall) {
         if (Test-Path $p) { Remove-Item -Recurse -Force $p; Write-Host "removed $rel" }
     }
     Remove-Item -Force $manifest
-    Write-Host 'claude-blueteam uninstalled.'
+    Write-Host 'blueteam uninstalled.'
     return
 }
 
 $ts     = Get-Date -Format 'yyyyMMdd-HHmmss'
-$backup = Join-Path $claude "install-backups\claude-blueteam-$ts"
+$backup = Join-Path $claude "install-backups\blueteam-$ts"
 $installed = New-Object System.Collections.Generic.List[string]
 
 function Install-Item([string] $src, [string] $rel) {
@@ -56,8 +56,8 @@ foreach ($kind in 'commands', 'agents') {
         Install-Item $_.FullName ("$kind\" + $_.Name)
     }
 }
-Install-Item (Join-Path $repo 'scripts\new-case.ps1') 'scripts\claude-blueteam\new-case.ps1'
-Install-Item (Join-Path $repo 'scripts\new-case.sh')  'scripts\claude-blueteam\new-case.sh'
+Install-Item (Join-Path $repo 'scripts\new-case.ps1') 'scripts\blueteam\new-case.ps1'
+Install-Item (Join-Path $repo 'scripts\new-case.sh')  'scripts\blueteam\new-case.sh'
 
 New-Item -ItemType Directory -Force -Path $manDir | Out-Null
 $installed | Set-Content -Encoding utf8 $manifest

@@ -1,4 +1,4 @@
-# claude-blueteam
+# Claude-BlueTeam
 
 > A Claude Code skill bundle for defenders · **45 skills** · **16 slash commands** · **5 subagents** · case-folder scaffolder ·
 > SOC triage, incident response, detection engineering, ATT&CK-mapped threat hunting, DFIR, hardening,
@@ -18,10 +18,10 @@ timeline, refuses to call a verdict without evidence, and never runs a containme
 
 ```text
 /plugin marketplace add Bizaza-devs/Claude-BlueTeam
-/plugin install claude-blueteam@bizaza-devs
+/plugin install blueteam@bizaza-devs
 ```
 
-Skills, commands and agents load namespaced under `claude-blueteam:` and update with the plugin version.
+Skills, commands and agents load namespaced under `blueteam:` and update with the plugin version.
 
 **Option B — copy install.**
 
@@ -162,7 +162,7 @@ New skills: read [CONTRIBUTING.md](CONTRIBUTING.md) first — it is the authorin
 Védekező (blue team) skill-csomag a Claude Code-hoz: riasztás-triázs, incidenskezelés, detekciófejlesztés
 (Sigma/KQL/SPL/YARA), ATT&CK-alapú fenyegetésvadászat, forenzika, hardening, sérülékenység-priorizálás és
 jelentésírás. Telepítés: `/plugin marketplace add Bizaza-devs/Claude-BlueTeam`, majd
-`/plugin install claude-blueteam@bizaza-devs`. Kezdésnek: `/triage`, `/ir`, `/hunt`, `/detect`.
+`/plugin install blueteam@bizaza-devs`. Kezdésnek: `/triage`, `/ir`, `/hunt`, `/detect`.
 
 ## License
 

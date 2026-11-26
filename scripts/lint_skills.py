@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Lint the claude-blueteam bundle.
+"""Lint the blueteam bundle.
 
 Checks
   skills/*/SKILL.md  frontmatter present, only name+description, name == folder,
@@ -17,6 +17,11 @@ from __future__ import annotations
 import re
 import sys
 from pathlib import Path
+
+try:
+    import yaml  # PyYAML: strict check that frontmatter parses the way Claude Code reads it
+except ImportError:  # pragma: no cover
+    yaml = None
 
 ROOT = Path(__file__).resolve().parent.parent
 REQUIRED_SECTIONS = ["## When to use", "## Ground rules", "## Workflow", "## Output"]
@@ -90,6 +95,26 @@ def lint_crossrefs(names: set[str]) -> None:
                 errors.append(f"{f.relative_to(ROOT)}: reference to unknown skill `{ref}`")
 
 
+def lint_yaml() -> None:
+    if yaml is None:
+        warnings.append("PyYAML not installed: strict frontmatter YAML check skipped (pip install pyyaml)")
+        return
+    files = list((ROOT / "skills").glob("*/SKILL.md")) + list((ROOT / "commands").glob("*.md")) + list(
+        (ROOT / "agents").glob("*.md")
+    )
+    for f in sorted(files):
+        text = f.read_text(encoding="utf-8")
+        if not text.startswith("---"):
+            continue
+        try:
+            data = yaml.safe_load(text[3 : text.find("\n---", 3)])
+            if not isinstance(data, dict):
+                raise ValueError("frontmatter is not a mapping")
+        except Exception as exc:  # noqa: BLE001
+            first = str(exc).splitlines()[0]
+            errors.append(f"{f.relative_to(ROOT)}: frontmatter is not valid YAML ({first}); quote the description")
+
+
 def lint_commands_agents() -> None:
     for cmd in sorted((ROOT / "commands").glob("*.md")):
         fm, _ = frontmatter(cmd)
@@ -113,6 +138,7 @@ def main() -> int:
         errors.append(f"skills/{extra} is not in the CONTRIBUTING.md catalogue")
     lint_crossrefs(names)
     lint_commands_agents()
+    lint_yaml()
 
     for w in warnings:
         print(f"WARN  {w}")

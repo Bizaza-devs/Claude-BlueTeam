@@ -1,20 +1,20 @@
 #!/usr/bin/env bash
 # =====================================================================
-# install.sh - copy-install claude-blueteam into Claude Code (macOS / Linux)
+# install.sh - copy-install blueteam into Claude Code (macOS / Linux)
 #
 #   bash scripts/install.sh              # skills + commands + agents -> ~/.claude/
 #   bash scripts/install.sh --uninstall  # remove what this script installed
 #
 # Prefer the plugin install when you can:
 #   /plugin marketplace add Bizaza-devs/Claude-BlueTeam
-#   /plugin install claude-blueteam@bizaza-devs
+#   /plugin install blueteam@bizaza-devs
 # =====================================================================
 set -euo pipefail
 
 repo="$(cd "$(dirname "$0")/.." && pwd)"
 claude="${CLAUDE_HOME:-$HOME/.claude}"
 mandir="$claude/.skill-manifests"
-manifest="$mandir/claude-blueteam.txt"
+manifest="$mandir/blueteam.txt"
 
 if [ "${1:-}" = "--uninstall" ]; then
   [ -f "$manifest" ] || { echo "Nothing to uninstall (no manifest)."; exit 0; }
@@ -22,11 +22,11 @@ if [ "${1:-}" = "--uninstall" ]; then
     [ -n "$rel" ] && [ -e "$claude/$rel" ] && rm -rf "${claude:?}/$rel" && echo "removed $rel"
   done < "$manifest"
   rm -f "$manifest"
-  echo "claude-blueteam uninstalled."
+  echo "blueteam uninstalled."
   exit 0
 fi
 
-backup="$claude/install-backups/claude-blueteam-$(date +%Y%m%d-%H%M%S)"
+backup="$claude/install-backups/blueteam-$(date +%Y%m%d-%H%M%S)"
 tmp_manifest="$(mktemp)"
 
 install_item() {  # $1 = source, $2 = path relative to ~/.claude
@@ -49,9 +49,9 @@ for kind in commands agents; do
     [ -e "$f" ] && install_item "$f" "$kind/$(basename "$f")"
   done
 done
-install_item "$repo/scripts/new-case.sh"  "scripts/claude-blueteam/new-case.sh"
-install_item "$repo/scripts/new-case.ps1" "scripts/claude-blueteam/new-case.ps1"
-chmod +x "$claude/scripts/claude-blueteam/new-case.sh"
+install_item "$repo/scripts/new-case.sh"  "scripts/blueteam/new-case.sh"
+install_item "$repo/scripts/new-case.ps1" "scripts/blueteam/new-case.ps1"
+chmod +x "$claude/scripts/blueteam/new-case.sh"
 
 mkdir -p "$mandir"
 mv "$tmp_manifest" "$manifest"

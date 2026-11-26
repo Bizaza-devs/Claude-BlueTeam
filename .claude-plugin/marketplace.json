@@ -10,7 +10,7 @@
   },
   "plugins": [
     {
-      "name": "claude-blueteam",
+      "name": "blueteam",
       "source": "./",
       "description": "Blue-team bundle: SOC triage, incident response, detection engineering, ATT&CK threat hunting, DFIR, hardening, vuln prioritisation, threat intel, IR reporting. 45 skills, 16 commands, 5 subagents.",
       "version": "1.0.0",

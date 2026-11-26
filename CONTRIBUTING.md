@@ -1,7 +1,7 @@
 # Contributing & skill authoring guide
 
 This file is the single source of truth for how skills, commands and agents in
-`claude-blueteam` are written. Every contributor (human or agent) follows it.
+`blueteam` are written. Every contributor (human or agent) follows it.
 
 ## What this bundle is
 

@@ -1,6 +1,6 @@
 ---
 name: blueteam-methodology
-description: The defender's operating model for the whole claude-blueteam bundle. Covers NIST SP 800-61 Rev. 3 (CSF 2.0 Govern/Identify/Protect/Detect/Respond/Recover) alongside the classic PICERL lifecycle (Preparation, Identification, Containment, Eradication, Recovery, Lessons learned), assume-breach thinking, the detect-triage-investigate-respond-improve loop, case discipline (case folder, UTC timeline, evidence log, decision log), a severity/priority matrix (SEV1-SEV4, P1-P4), comms cadence and escalation triggers. Use when starting any security case, deciding which skill to load next, setting severity, asking "how do we run this incident", "what phase are we in", "who do I escalate to", or when building a SOC/IR process.
+description: The defender's operating model for the whole blueteam bundle. Covers NIST SP 800-61 Rev. 3 (CSF 2.0 Govern/Identify/Protect/Detect/Respond/Recover) alongside the classic PICERL lifecycle (Preparation, Identification, Containment, Eradication, Recovery, Lessons learned), assume-breach thinking, the detect-triage-investigate-respond-improve loop, case discipline (case folder, UTC timeline, evidence log, decision log), a severity/priority matrix (SEV1-SEV4, P1-P4), comms cadence and escalation triggers. Use when starting any security case, deciding which skill to load next, setting severity, asking "how do we run this incident", "what phase are we in", "who do I escalate to", or when building a SOC/IR process.
 ---
 
 # Blue team methodology

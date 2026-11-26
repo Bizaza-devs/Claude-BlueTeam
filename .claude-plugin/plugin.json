@@ -1,5 +1,5 @@
 {
-  "name": "claude-blueteam",
+  "name": "blueteam",
   "description": "Blue-team skill bundle for Claude Code: SOC alert triage, incident response (ransomware, BEC, AWS, Entra, insider), detection engineering (Sigma, KQL, SPL, EQL/ES|QL, YARA, Suricata/Zeek), ATT&CK-mapped threat hunting, Windows/Linux/memory forensics, hardening, vulnerability prioritisation, threat intel and IR reporting. 45 skills, 16 slash commands, 5 subagents, case-folder scaffolder.",
   "version": "1.0.0",
   "author": {
